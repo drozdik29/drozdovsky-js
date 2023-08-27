@@ -26,5 +26,6 @@ Scenario(' registration ',  ({ I }) => {
     I.click(selectors.privacyPolicyAgreement);
     I.click(selectors.continueButton);
     pause();
+    
 });
 
