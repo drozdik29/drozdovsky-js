@@ -19,7 +19,9 @@ exports.config = {
     }
   },
   include: {
-    I: './steps_file.js'
+    I: './steps_file.js',
+    basePage: "./pages/goToRegistration.js",
+    accountPage: "./pages/account.js",
   },
   name: 'drozdovsky-js'
 }
