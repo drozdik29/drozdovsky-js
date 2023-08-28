@@ -8,17 +8,20 @@ setCommonPlugins();
 
 /** @type {CodeceptJS.MainConfig} */
 exports.config = {
-  tests: 'test/*_test.js',
+  tests: 'tests/*_test.js',
   output: './output',
   helpers: {
     Playwright: {
       browser: 'chromium',
       url: '',
-      show: true
+      show: true,
+      windowSize: '1680x1000'
     }
   },
   include: {
-    I: './steps_file.js'
+    I: './steps_file.js',
+    basePage: "./pages/base.js",
+    accountPage: "./pages/account.js",
   },
   name: 'drozdovsky-js'
 }
