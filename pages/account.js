@@ -1,6 +1,5 @@
 const { I } = inject();
 
-
 module.exports ={
     firstName: {xpath:'//*[@id="input-firstname"]'},
     lastName:{xpath:'//*[@id="input-lastname"]'},
@@ -13,7 +12,7 @@ module.exports ={
     privacyPolicyAgreement:{xpath:'//*[@id="content"]/form/div/div/input[1]'},
     continueButton:{xpath:'//*[@id="content"]/form/div/div/input[2]'},
 
-    inputData(userData){
+    fillNewUserForm(userData){
     I.fillField(this.firstName,userData.firstName);
     I.fillField(this.lastName,userData.lastName);
     I.fillField(this.email,userData.email);

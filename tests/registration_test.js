@@ -1,5 +1,3 @@
-
-
 const userData = {
   firstName: "Maksym",
   lastName: "123",
@@ -12,8 +10,8 @@ Scenario(' registration ',  ({ I ,basePage,accountPage }) => {
     I.amOnPage('http://opencart.qatestlab.net/');    
     basePage.clickMyAccount();
     basePage.clickRegister();
-    accountPage.inputData(userData);
+    accountPage.fillNewUserForm(userData);
     accountPage.clickToAgree();
     accountPage.verifyRegisterAccountPage();
-})
+});
 
