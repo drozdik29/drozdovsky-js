@@ -16,8 +16,12 @@ exports.config = {
       url: '',
       show: true,
       windowSize: '1680x1000'
+    },
+    ChaiWrapper: {
+      require: "codeceptjs-chai"
     }
   },
+ 
   include: {
     I: './steps_file.js',
     basePage: "./pages/base.js",

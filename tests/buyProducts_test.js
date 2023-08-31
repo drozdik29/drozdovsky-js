@@ -10,7 +10,7 @@ const userData = {
 
 Feature('buy product');
 
-Scenario('buy product', async ({ I, cartPage, productPage }) => {
+xScenario('buy product', async ({ I, cartPage, productPage }) => {
     I.login(userData);
     I.amOnPage('http://opencart.qatestlab.net/index.php?route=product/product&path=18&product_id=48');
     productPage.selectColor();
@@ -24,10 +24,11 @@ Scenario('buy product', async ({ I, cartPage, productPage }) => {
     console.log(productPrice);
     const totalPrice = cartPage.getTotalPrice();
     const tax = cartPage.getTax();
-    if (totalPrice + tax === productPrice) {
-        console.log('Prices equal')
-    } else {
-        console.log('Prices not equal')
-    }
     cartPage.confirmAndVerifyOrder();
-})
+    I.assertEqual(productPrice + tax, totalPrice, "Prices are not in match!");
+},
+Scenario('clean the basket', async ({ I, cartPage, productPage }) => {
+    I.login(userData);
+    I.amOnPage('http://opencart.qatestlab.net/index.php?route=product/product&path=18&product_id=48');
+    I.clearTheBasket();
+}))

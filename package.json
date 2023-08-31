@@ -10,10 +10,16 @@
   "license": "ISC",
   "dependencies": {
     "codeceptjs": "^3.5.4",
-    "playwright": "^1.37.1"
+    "playwright": "^1.37.1",
+    "codeceptjs-chai": "^2.3.5"
+
   },
+
   "directories": {
     "test": "tests"
   },
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "codeceptjs-chai": "^2.3.5"
+  }
 }
