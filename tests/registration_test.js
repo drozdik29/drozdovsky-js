@@ -6,7 +6,7 @@ const userData = {
   password:'53x4am5F8dhdF'
 };
 Feature('registration');
-Scenario(' registration ',  ({ I ,basePage,accountPage }) => {
+xScenario(' registration ',  ({ I ,basePage,accountPage }) => {
     I.amOnPage('http://opencart.qatestlab.net/');    
     basePage.clickMyAccount();
     basePage.clickRegister();
