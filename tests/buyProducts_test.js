@@ -16,13 +16,13 @@ xScenario('buy product', async ({ I, cartPage, productPage }) => {
     productPage.selectColor();
     productPage.selectSize();
     productPage.getProductPrice();
-    const productPrice = productPage.getProductPrice();
+    const productPrice = await productPage.getProductPrice();
     I.goToCheckout();
     //cartPage.fillBillingDetails(userData);
     cartPage.fillDeliveryDetails();
     cartPage.payForProduct();
     console.log(productPrice);
-    const totalPrice = cartPage.getTotalPrice();
+    const totalPrice = await cartPage.getTotalPrice();
     const tax = cartPage.getTax();
     cartPage.confirmAndVerifyOrder();
     I.assertEqual(productPrice + tax, totalPrice, "Prices are not in match!");
