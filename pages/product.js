@@ -17,14 +17,18 @@ module.exports = {
         I.click(this.sizeDropDown);
         I.click(this.sizeOption);
     },
-    
+
+    async parsePrice(priceString) {
+        return await parseFloat(priceString.replace(/[^0-9.-]/g, ''));
+    },
+
     async getProductPrice() {
-        const draftProductPrice = await I.grabTextFrom(this.productPriceText);
-        const draftColorPrice = await I.grabTextFrom(this.colorOption);
-        const draftSizePrice = await I.grabTextFrom(this.sizeOption);
-    
-        return parseFloat(draftProductPrice.replace(/[^0-9.-]/g, ''))+parseFloat(draftSizePrice.replace(/[^0-9.-]/g, ''))+parseFloat(draftColorPrice.replace(/[^0-9.-]/g, ''))
-      },
-    
+        const draftProductPrice = this.parsePrice(await I.grabTextFrom(this.productPriceText));
+        const draftColorPrice = this.parsePrice(await I.grabTextFrom(this.colorOption));
+        const draftSizePrice = this.parsePrice(await I.grabTextFrom(this.sizeOption));
+
+        return draftColorPrice + draftSizePrice + draftProductPrice;
+    },
+
 
 }

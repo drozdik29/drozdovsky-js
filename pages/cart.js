@@ -44,14 +44,17 @@ module.exports = {
         I.click(this.termsCheckbox);
         I.click(this.continuePaymentButton);
     },
+    async parsePrice(priceString) {
+        return await parseFloat(priceString.replace(/[^0-9.-]/g, ''));
+    },
 
     async getTotalPrice() {
-        const totalPriceProduct = await I.grabTextFrom(this.totalPrice);
-        return parseFloat(totalPriceProduct.replace(/[^0-9.-]/g, ''));
+        const totalPriceProduct = this.parsePrice(await I.grabTextFrom(this.totalPrice));
+        return totalPriceProduct
     },
 
     async getTax() {
-        const allTaxesOfProduct = parseFloat((await I.grabTextFrom(this.vat)).replace(/[^0-9.-]/g, '')) + parseFloat((await I.grabTextFrom(this.ecoTax)).replace(/[^0-9.-]/g, '')) + parseFloat((await I.grabTextFrom(this.flatShippingRate)).replace(/[^0-9.-]/g, ''));
+        const allTaxesOfProduct = this.parsePrice(await I.grabTextFrom(this.vat))+this.parsePrice(await I.grabTextFrom(this.ecoTax))+this.parsePrice(await I.grabTextFrom(this.flatShippingRate));
         return allTaxesOfProduct;
     },
 
