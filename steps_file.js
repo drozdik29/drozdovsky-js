@@ -29,11 +29,15 @@ module.exports = function () {
       this.click(bucket);
       this.click(goToCheckout);
     },
-    async clearTheBasket() {
+    async clearCart() {
       const elements = await this.grabNumberOfVisibleElements(basket);
       if (elements > 0) {
         this.click(bucket);
-        this.click(delButton);
+        let isElementPresent = await this.grabNumberOfVisibleElements(delButton) > 0;
+        while (isElementPresent) {
+            this.click(delButton); 
+            isElementPresent = await this.grabNumberOfVisibleElements(delButton) > 0; 
+        }
       }
     }
   });

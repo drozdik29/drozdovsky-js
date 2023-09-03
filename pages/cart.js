@@ -49,13 +49,11 @@ module.exports = {
     },
 
     async getTotalPrice() {
-        const totalPriceProduct = this.parsePrice(await I.grabTextFrom(this.totalPrice));
-        return totalPriceProduct
+        return this.parsePrice(await I.grabTextFrom(this.totalPrice));
     },
 
     async getTax() {
-        const allTaxesOfProduct = this.parsePrice(await I.grabTextFrom(this.vat))+this.parsePrice(await I.grabTextFrom(this.ecoTax))+this.parsePrice(await I.grabTextFrom(this.flatShippingRate));
-        return allTaxesOfProduct;
+       return this.parsePrice(await I.grabTextFrom(this.vat))+this.parsePrice(await I.grabTextFrom(this.ecoTax))+this.parsePrice(await I.grabTextFrom(this.flatShippingRate));
     },
 
     confirmAndVerifyOrder() {

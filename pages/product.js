@@ -23,11 +23,7 @@ module.exports = {
     },
 
     async getProductPrice() {
-        const draftProductPrice = this.parsePrice(await I.grabTextFrom(this.productPriceText));
-        const draftColorPrice = this.parsePrice(await I.grabTextFrom(this.colorOption));
-        const draftSizePrice = this.parsePrice(await I.grabTextFrom(this.sizeOption));
-
-        return draftColorPrice + draftSizePrice + draftProductPrice;
+        return this.parsePrice(await I.grabTextFrom(this.productPriceText)) + this.parsePrice(await I.grabTextFrom(this.sizeOption)) + this.parsePrice(await I.grabTextFrom(this.colorOption));
     },
 
 
