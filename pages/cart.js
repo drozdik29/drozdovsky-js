@@ -14,11 +14,12 @@ module.exports = {
     payCommentForPay: { xpath: '//*[@id="collapse-payment-method"]/div/p[3]/textarea' },
     termsCheckbox: { xpath: '//*[@id="agree1"]' },
     continuePaymentButton: { xpath: '//*[@id="button-payment-method"]' },
-    totalPrice: { xpath: '//*[@id="collapse-checkout-confirm"]/div/div[1]/table/tbody/tr/td[5]' },
+    totalPrice: { xpath: '//*[@id="collapse-checkout-confirm"]/div/div[1]/table/tfoot/tr[5]/td[2]' },
     flatShippingRate: { xpath: '//*[@id="collapse-checkout-confirm"]/div/div[1]/table/tfoot/tr[2]/td[2]' },
     ecoTax: { xpath: '//*[@id="collapse-checkout-confirm"]/div/div[1]/table/tfoot/tr[3]/td[2]' },
     vat: { xpath: '//*[@id="collapse-checkout-confirm"]/div/div[1]/table/tfoot/tr[4]/td[2]' },
     confirmAndVerifyOrderButton: { xpath: '//*[@id="button-confirm"]' },
+
 
 
     fillBillingDetails(userData) {
@@ -44,8 +45,9 @@ module.exports = {
         I.click(this.termsCheckbox);
         I.click(this.continuePaymentButton);
     },
-    async parsePrice(priceString) {
-        return await parseFloat(priceString.replace(/[^0-9.-]/g, ''));
+     parsePrice(priceString) {
+        console.log('parsed price: ',parseFloat(priceString.replace(/[^0-9.-]/g, '')));
+        return parseFloat(priceString.replace(/[^0-9.-]/g, ''));
     },
 
     async getTotalPrice() {

@@ -12,7 +12,7 @@ Feature('buy product');
 
 Scenario('buy product', async ({ I, cartPage, productPage }) => {
     I.login(userData);
-    I.amOnPage('http://opencart.qatestlab.net/index.php?route=product/product&path=18&product_id=48');
+    I.amOnPage('http://opencart.qatestlab.net/index.php?route=product/product&path=18&product_id=44');
     await I.clearCart();
     productPage.selectColor();
     productPage.selectSize();
@@ -24,7 +24,7 @@ Scenario('buy product', async ({ I, cartPage, productPage }) => {
     cartPage.payForProduct();
     console.log(productPrice);
     const totalPrice = await cartPage.getTotalPrice();
-    const tax = cartPage.getTax();
+    const tax = await cartPage.getTax();
     cartPage.confirmAndVerifyOrder();
     I.assertEqual(productPrice + tax, totalPrice, "Prices are not in match!");
 });
