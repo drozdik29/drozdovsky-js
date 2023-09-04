@@ -46,15 +46,18 @@ module.exports = {
         I.click(this.continuePaymentButton);
     },
      parsePrice(priceString) {
-        console.log('parsed price: ',parseFloat(priceString.replace(/[^0-9.-]/g, '')));
         return parseFloat(priceString.replace(/[^0-9.-]/g, ''));
     },
 
     async getTotalPrice() {
+        console.log('total price: ',this.parsePrice(await I.grabTextFrom(this.totalPrice)));
         return this.parsePrice(await I.grabTextFrom(this.totalPrice));
     },
 
     async getTax() {
+        console.log('vat: ',this.parsePrice(await I.grabTextFrom(this.vat)));
+        console.log('ecoTax: ',this.parsePrice(await I.grabTextFrom(this.ecoTax)));
+        console.log('flatShippingRate: ',this.parsePrice(await I.grabTextFrom(this.flatShippingRate)));
        return this.parsePrice(await I.grabTextFrom(this.vat))+this.parsePrice(await I.grabTextFrom(this.ecoTax))+this.parsePrice(await I.grabTextFrom(this.flatShippingRate));
     },
 

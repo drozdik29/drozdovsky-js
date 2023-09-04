@@ -19,11 +19,13 @@ module.exports = {
     },
 
     parsePrice(priceString) {
-        console.log('parsed price: ', parseFloat(priceString.replace(/[^0-9.-]/g, '')));
         return parseFloat(priceString.replace(/[^0-9.-]/g, ''));
     },
 
     async getProductPrice() {
+        console.log('product price: ',this.parsePrice(await I.grabTextFrom(this.productPriceText)));
+        console.log('size price: ',this.parsePrice(await I.grabTextFrom(this.sizeOption)));
+        console.log('color price: ',this.parsePrice(await I.grabTextFrom(this.colorOption)));
         return this.parsePrice(await I.grabTextFrom(this.productPriceText)) + this.parsePrice(await I.grabTextFrom(this.sizeOption)) + this.parsePrice(await I.grabTextFrom(this.colorOption));
     },
 
