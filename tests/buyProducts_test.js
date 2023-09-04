@@ -16,7 +16,6 @@ Scenario('buy product', async ({ I, cartPage, productPage }) => {
     await I.clearCart();
     productPage.selectColor();
     productPage.selectSize();
-    productPage.getProductPrice();
     const productPrice = await productPage.getProductPrice();
     I.goToCheckout();
     //cartPage.fillBillingDetails(userData);
