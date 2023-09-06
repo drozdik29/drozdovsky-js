@@ -39,6 +39,9 @@ module.exports = function () {
             isElementPresent = await this.grabNumberOfVisibleElements(delButton) > 0; 
         }
       }
+      else {
+        console.log("The basket is empty. No need to delete items.");
+          }
     }
   });
 }
