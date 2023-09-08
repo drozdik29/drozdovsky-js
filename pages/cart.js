@@ -1,3 +1,5 @@
+const PriceHelper = require('../helpers/priceHelper');
+const priceHelper = new PriceHelper();
 const { I } = inject();
 
 module.exports = {
@@ -19,10 +21,6 @@ module.exports = {
     ecoTax: { xpath: '//*[@id="collapse-checkout-confirm"]/div/div[1]/table/tfoot/tr[3]/td[2]' },
     vat: { xpath: '//*[@id="collapse-checkout-confirm"]/div/div[1]/table/tfoot/tr[4]/td[2]' },
     confirmAndVerifyOrderButton: { xpath: '//*[@id="button-confirm"]' },
-
-    parsePrice(priceString) {
-        return parseFloat(priceString.replace(/[^0-9.-]/g, ''));
-    },
 
     fillBillingDetails(userData) {
         I.fillField(this.firstName, userData.firstName);
@@ -49,15 +47,15 @@ module.exports = {
     },
 
     async getTotalPrice() {
-        console.log('total price: ', this.parsePrice(await I.grabTextFrom(this.totalPrice)));
-        return this.parsePrice(await I.grabTextFrom(this.totalPrice));
+        console.log('total price: ', priceHelper.parsePrice(await I.grabTextFrom(this.totalPrice)));
+        return priceHelper.parsePrice(await I.grabTextFrom(this.totalPrice));
     },
 
     async getTax() {
-        console.log('vat: ', this.parsePrice(await I.grabTextFrom(this.vat)));
-        console.log('ecoTax: ', this.parsePrice(await I.grabTextFrom(this.ecoTax)));
-        console.log('flatShippingRate: ', this.parsePrice(await I.grabTextFrom(this.flatShippingRate)));
-        return this.parsePrice(await I.grabTextFrom(this.vat)) + this.parsePrice(await I.grabTextFrom(this.ecoTax)) + this.parsePrice(await I.grabTextFrom(this.flatShippingRate));
+        console.log('vat: ', priceHelper.parsePrice(await I.grabTextFrom(this.vat)));
+        console.log('ecoTax: ', priceHelper.parsePrice(await I.grabTextFrom(this.ecoTax)));
+        console.log('flatShippingRate: ', priceHelper.parsePrice(await I.grabTextFrom(this.flatShippingRate)));
+        return priceHelper.parsePrice(await I.grabTextFrom(this.vat)) + priceHelper.parsePrice(await I.grabTextFrom(this.ecoTax)) + priceHelper.parsePrice(await I.grabTextFrom(this.flatShippingRate));
     },
 
     confirmAndVerifyOrder() {

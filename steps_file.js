@@ -7,13 +7,9 @@ addToCart = { xpath: '//*[@id="button-cart"]' };
 bucket = { xpath: '//*[@id="cart"]/button/i' };
 goToCheckout = { xpath: '//*[@id="cart"]/ul/li[3]/div/a[2]' };
 basket = { xpath: '//*[@id="cart-total2"]' };
-delButton = {xpath: '//*[@id="cart"]/ul/li[1]/div[1]/button[2]/i'};
-
+delButton = { xpath: '//*[@id="cart"]/ul/li[1]/div[1]/button[2]/i' };
 module.exports = function () {
   return actor({
-
-    // Define custom steps here, use 'this' to access default methods of I.
-    // It is recommended to place a general 'login' function here.
     login(userData) {
       this.amOnPage('http://opencart.qatestlab.net/');
       this.click(myAccount);
@@ -32,16 +28,17 @@ module.exports = function () {
     async clearCart() {
       const elements = await this.grabNumberOfVisibleElements(basket);
       if (elements > 0) {
-        this.click(bucket);
-        let isElementPresent = await this.grabNumberOfVisibleElements(delButton) > 0;
-        while (isElementPresent) {
-            this.click(delButton); 
-            isElementPresent = await this.grabNumberOfVisibleElements(delButton) > 0; 
-        }
+          this.click(bucket);
+          let itemCount;
+          do {
+              itemCount = await this.grabNumberOfVisibleElements(delButton);
+              if (itemCount > 0) {
+                  this.click(delButton);
+              }
+          } while (itemCount > 0);
+      } else {
+          console.log("The basket is empty. No need to delete items.");
       }
-      else {
-        console.log("The basket is empty. No need to delete items.");
-          }
-    }
+  }
   });
 }
