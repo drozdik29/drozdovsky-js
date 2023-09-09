@@ -32,7 +32,7 @@ module.exports = function () {
           let itemCount;
           do {
               itemCount = await this.grabNumberOfVisibleElements(delButton);
-              if (itemCount > 0) {
+              if(itemCount>0){
                   this.click(delButton);
               }
           } while (itemCount > 0);
