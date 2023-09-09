@@ -1,7 +1,3 @@
-const PriceHelper = require('../helpers/priceHelper');
-const priceHelper = new PriceHelper();
-const ElementCheckingHelper = require('../helpers/elementCheckingHelper');
-const elCheck = new ElementCheckingHelper();
 const { I } = inject();
 module.exports = {
     colorDropDown: { xpath: '//label[text()="Color"]/following-sibling::div/a[1]' },
@@ -11,7 +7,7 @@ module.exports = {
     productPriceText: { xpath: '//*[@id="content"]/div[1]/div[2]/div/div[1]/span' },
     available: { xpath: '//*[@id="content"]/div[1]/div[2]/div/ul/li[last()]' },
 
-    async checkAvailable() {
+    async verifyAvailable() {
         if (await I.grabTextFrom(this.available) == 'Availability: In Stock') {
             console.log('Product is available')
         } else {
@@ -20,22 +16,22 @@ module.exports = {
     },
 
     async checkSizeExists() {
-        return elCheck.checkElementExists(this.sizeDropDown);
+        return I.checkElementExists(this.sizeDropDown);
     },
 
     async checkColorExists() {
-        return elCheck.checkElementExists(this.colorDropDown);
+        return I.checkElementExists(this.colorDropDown);
     },
 
     async selectColor() {
-        if (await this.checkColorExists() == true) {
+        if (this.checkColorExists) {
             I.click(this.colorDropDown);
             I.click(this.colorOption);
         }
     },
 
     async selectSize() {
-        if (await this.checkSizeExists() == true) {
+        if (this.checkSizeExists) {
             I.click(this.sizeDropDown);
             I.click(this.sizeOption);
         }
@@ -43,15 +39,15 @@ module.exports = {
 
 
     async getProductPrice() {
-        let price = priceHelper.parsePrice(await I.grabTextFrom(this.productPriceText));
-        console.log('product price: ', priceHelper.parsePrice(await I.grabTextFrom(this.productPriceText)));
-        if (await this.checkColorExists() == true) {
-            console.log('color price: ', priceHelper.parsePrice(await I.grabTextFrom(this.colorOption)));
-            price += priceHelper.parsePrice(await I.grabTextFrom(this.colorOption));
-            if (await this.checkSizeExists() == true) {
-                console.log('size price: ', priceHelper.parsePrice(await I.grabTextFrom(this.sizeOption)));
-                price += priceHelper.parsePrice(await I.grabTextFrom(this.sizeOption));
-            }
+        let price = await I.parsePrice(await I.grabTextFrom(this.productPriceText));
+        console.log('product price: ', await I.parsePrice(await I.grabTextFrom(this.productPriceText)));
+        if ( this.checkColorExists) {
+            console.log('color price: ',await I.parsePrice(await I.grabTextFrom(this.colorOption)));
+            price += await I.parsePrice(await I.grabTextFrom(this.colorOption));
+        }
+        if ( this.checkSizeExists) {
+            console.log('size price: ',await I.parsePrice(await I.grabTextFrom(this.sizeOption)));
+            price += await I.parsePrice(await I.grabTextFrom(this.sizeOption));
         }
         return price;
     }

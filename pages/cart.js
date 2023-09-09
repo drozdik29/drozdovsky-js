@@ -1,7 +1,4 @@
-const PriceHelper = require('../helpers/priceHelper');
-const priceHelper = new PriceHelper();
 const { I } = inject();
-
 module.exports = {
     firstName: { xpath: '//*[@id="input-payment-firstname"]' },
     lastName: { xpath: '//*[@id="input-payment-lastname"]' },
@@ -40,22 +37,23 @@ module.exports = {
         I.click(this.continueButtonDeliveryMethod);
     },
 
-    payForProduct() {
+    async payForProduct() {
         I.fillField(this.payCommentForPay, 'JavaScript!=Java');
         I.click(this.termsCheckbox);
         I.click(this.continuePaymentButton);
     },
 
     async getTotalPrice() {
-        console.log('total price: ', priceHelper.parsePrice(await I.grabTextFrom(this.totalPrice)));
-        return priceHelper.parsePrice(await I.grabTextFrom(this.totalPrice));
+        const totalPrice = await I.parsePrice(await I.grabTextFrom(this.totalPrice))
+        console.log('total price: ',totalPrice );
+        return totalPrice;
     },
 
     async getTax() {
-        console.log('vat: ', priceHelper.parsePrice(await I.grabTextFrom(this.vat)));
-        console.log('ecoTax: ', priceHelper.parsePrice(await I.grabTextFrom(this.ecoTax)));
-        console.log('flatShippingRate: ', priceHelper.parsePrice(await I.grabTextFrom(this.flatShippingRate)));
-        return priceHelper.parsePrice(await I.grabTextFrom(this.vat)) + priceHelper.parsePrice(await I.grabTextFrom(this.ecoTax)) + priceHelper.parsePrice(await I.grabTextFrom(this.flatShippingRate));
+        console.log('vat: ', await I.parsePrice(await I.grabTextFrom(this.vat)));
+        console.log('ecoTax: ', await I.parsePrice(await I.grabTextFrom(this.ecoTax)));
+        console.log('flatShippingRate: ', await I.parsePrice(await I.grabTextFrom(this.flatShippingRate)));
+        return await I.parsePrice(await I.grabTextFrom(this.vat)) + await I.parsePrice(await I.grabTextFrom(this.ecoTax)) + await I.parsePrice(await I.grabTextFrom(this.flatShippingRate));
     },
 
     confirmAndVerifyOrder() {

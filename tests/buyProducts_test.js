@@ -21,7 +21,7 @@ Before(({ I }) => {
 Data(userData.IDs).Scenario('buy product', async ({ I, cartPage, productPage, current }) => {
     I.amOnPage('http://opencart.qatestlab.net//index.php?route=product/product&product_id=' + current);
     await I.clearCart();
-    await productPage.checkAvailable();
+    await productPage.verifyAvailable();
     console.log("Color exists?", await productPage.checkColorExists());
     productPage.selectColor();
     console.log("Size exists?", await productPage.checkSizeExists());
@@ -34,11 +34,7 @@ Data(userData.IDs).Scenario('buy product', async ({ I, cartPage, productPage, cu
     const totalPrice = await cartPage.getTotalPrice();
     const tax = await cartPage.getTax();
     cartPage.confirmAndVerifyOrder();
+    console.log('Price in UA Hryvnias: ',await I.convertToUSD(totalPrice));
     I.assertEqual(productPrice + tax, totalPrice, "Prices are not in match!");
-    const usdRate = (await I.sendGetRequest('/exchange?valcode=USD&json')).data[0].rate;
-    console.log('USD to UAH:', usdRate)
-    console.log("Price in UAH:", (usdRate * totalPrice).toFixed(2));
-    await I.sendGetRequest('/exchange?valcode=USD&json').data;
-    I.seeResponseCodeIs(200);
 }
 );
