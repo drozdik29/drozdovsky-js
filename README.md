@@ -1,6 +1,7 @@
 ## Drozdovsky Automation Tests JS
 [![Test Status](https://github.com/drozdik29/drozdovsky-js/workflows/CodeceptJS%20Tests/badge.svg)](https://github.com/drozdik29/drozdovsky-js/actions)
 
+
 ## Motivation
 I built this project to harness the power of CodeceptJS for automated testing. As a tester, I wanted to streamline the testing process, improve test coverage, and ensure the quality of our software products.
 
