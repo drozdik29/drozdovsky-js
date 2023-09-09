@@ -17,31 +17,39 @@ exports.config = {
       show: true,
       windowSize: '1680x1000'
     },
-    ChaiWrapper: {
-      require: "codeceptjs-chai"
+    "Mochawesome": {
+      "uniqueScreenshotNames": "true"
     },
-    PriceHelper: {
-      require: './helpers/priceHelper.js'
-    },
-    ElementCheckingHelper: {
-      require: './helpers/elementCheckingHelper.js'
-    },
-    REST: {
-      endpoint: 'https://bank.gov.ua/NBUStatService/v1/statdirectory/',
-      prettyPrintJson: true,
-      defaultHeaders: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-    },
-    JSONResponse: {},
+  ChaiWrapper: {
+    require: "codeceptjs-chai"
   },
+  PriceHelper: {
+    require: './helpers/priceHelper.js'
+  },
+  ElementCheckingHelper: {
+    require: './helpers/elementCheckingHelper.js'
+  },
+  REST: {
+    endpoint: 'https://bank.gov.ua/NBUStatService/v1/statdirectory/',
+    prettyPrintJson: true,
+    defaultHeaders: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    },
+  },
+  JSONResponse: {},
+},
   include: {
-    I: './steps_file.js',
+  I: './steps_file.js',
     basePage: "./pages/base.js",
-    accountPage: "./pages/account.js",
-    productPage: "./pages/product.js",
-    cartPage: "./pages/cart.js",
+      accountPage: "./pages/account.js",
+        productPage: "./pages/product.js",
+          cartPage: "./pages/cart.js",
   },
-  name: 'drozdovsky-js'
+"mocha": {
+  "reporterOptions": {
+    "reportDir": "output"
+  }
+},
+name: 'drozdovsky-js'
 }
