@@ -1,4 +1,4 @@
-# <Drozdovsky Automation Tests JS>
+## Drozdovsky Automation Tests JS
 
 ## Motivation
 I built this project to harness the power of CodeceptJS for automated testing. As a tester, I wanted to streamline the testing process, improve test coverage, and ensure the quality of our software products.
