@@ -11,7 +11,6 @@ const userData = {
     address1: "Aberdeenova street 1",
     IDs: FileReader.convertStringToArray(productIds)
 };
-
 Feature('buy product');
 
 Before(({ I }) => {

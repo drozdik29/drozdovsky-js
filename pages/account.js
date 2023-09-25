@@ -1,5 +1,4 @@
 const { I } = inject();
-
 module.exports ={
     firstName: {xpath:'//*[@id="input-firstname"]'},
     lastName:{xpath:'//*[@id="input-lastname"]'},

@@ -5,6 +5,7 @@ class ElementCheckingHelper extends Helper {
     return Boolean(await this.helpers['Playwright'].grabNumberOfVisibleElements(locator));
   }
 
+  
 }
 
 module.exports = ElementCheckingHelper;
